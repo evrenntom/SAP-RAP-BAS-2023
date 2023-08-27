@@ -1,0 +1,63 @@
+managed implementation in class zbp_rpsg_i_am_el_c01 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_AM_EL_C01 //alias <alias_name>
+persistent table zrpsg_am_el_c01
+draft table zrpsg_dam_el_c01
+lock master total etag AllLastchangeTime
+authorization master ( instance )
+etag master LastchangeTime
+{
+
+  field ( readonly : update ) ElementTypeGroupNum;
+  field ( readonly ) LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  create;
+  update;
+  delete( precheck );
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate;
+  draft action Discard;
+  mapping for zrpsg_am_el_c01
+    {
+      ElementTypeGroupNum = element_type_group_num;
+      Description         = description;
+      LastchangeUser      = lastchange_user;
+      LastchangeTime      = lastchange_time;
+      AllLastchangeTime   = all_lastchange_time;
+    }
+
+  association _EL_C02 { create; with draft; }
+
+}
+
+define behavior for ZRPSG_I_AM_EL_C02 //alias <alias_name>
+persistent table zrpsg_am_el_c02
+draft table zrpsg_dam_el_c02
+lock dependent by _el_c01
+authorization dependent by _el_c01
+etag master LastchangeTime
+{
+
+  field ( readonly ) ElementTypeGroupNum;
+  field ( readonly : update ) ElementType;
+  field ( readonly ) LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  update;
+  delete;
+  mapping for zrpsg_am_el_c02
+    {
+      ElementTypeGroupNum = element_type_group_num;
+      ElementType         = element_type;
+      LastchangeTime      = lastchange_time;
+      LastchangeUser      = lastchange_user;
+      AllLastchangeTime   = all_lastchange_time;
+    }
+
+  association _el_c01 { with draft; }
+
+}

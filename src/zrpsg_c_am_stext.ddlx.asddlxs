@@ -1,0 +1,65 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+//  typeName: 'Shorttext',
+//                typeNamePlural: 'Shorttexts',
+                title: { type: #STANDARD
+//                , value: 'Num'
+                } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC } ] }]
+   }
+annotate entity ZRPSG_C_AM_STEXT with
+{
+  @UI.facet: [   { id:              'EL_STEXT',
+               purpose:         #STANDARD,
+               type:            #IDENTIFICATION_REFERENCE,
+               label:           'Contract',
+               position:        20 }
+               ]
+  @UI: {  //lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [{position: 10 }]}
+  Num;
+  @UI: {  //lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [{position: 20 }]}
+  VersionNum;
+  //@UI: {  lineItem:       [ { position: 30 } ],
+  //        identification: [ { position: 30 } ],
+  //        selectionField: [{position: 30 }] }
+  //    ElementNum;
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [ { position: 40 } ],
+          textArrangement: #TEXT_FIRST
+          }
+  @Consumption.valueHelpDefinition: [{ qualifier: ''
+                                     , entity: { name: 'ZRPSG_I_ET_STEXT_VH', element: 'ElementType' }
+                                     , distinctValues: true
+                                     , useForValidation: true
+                                     , enabled: ''
+                                     , additionalBinding: [{ localParameter: ''
+                                                            , localElement: 'AgreementType'
+                                                            , localConstant: ''
+                                                            , parameter: ''
+                                                            , element: 'AgreementType'
+                                                            , usage: #FILTER_AND_RESULT } ]
+                                     , label: ''
+                                     , presentationVariantQualifier: ''
+                                     }]
+  ElementType;
+  @UI: { lineItem:       [ { position: 50 } ],
+         identification: [ { position: 50 } ],
+         selectionField: [{position: 50 }] }
+  Description;
+  @UI: { lineItem:       [ { position: 60 } ],
+         identification: [ { position: 60 } ],
+         selectionField: [{position: 60 }] }
+  Text;
+  @UI: { hidden: true }
+  ElementTypeText;
+  @UI: { hidden: true }
+  AgreementType;
+}

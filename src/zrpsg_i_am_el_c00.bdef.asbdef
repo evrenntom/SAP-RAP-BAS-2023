@@ -1,0 +1,36 @@
+managed implementation in class zbp_rpsg_i_am_el_c00 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_AM_EL_C00 //alias <alias_name>
+persistent table zrpsg_am_el_c00
+draft table zrpsg_dam_el_c00
+lock master total etag AllLastchangeTime
+authorization master ( instance )
+etag master LastchangeTime
+{
+
+  field ( readonly : update ) ElementType;
+  field ( readonly ) LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  create;
+  update;
+  delete( precheck );
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate;
+  draft action Discard;
+
+  mapping for zrpsg_am_el_c00
+    {
+      ElementType       = element_type;
+      Description       = description;
+      ObjektType        = objekt_type;
+      LastchangeUser    = lastchange_user;
+      LastchangeTime    = lastchange_time;
+      AllLastchangeTime = all_lastchange_time;
+    }
+
+}

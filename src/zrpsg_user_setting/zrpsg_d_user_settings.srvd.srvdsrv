@@ -1,0 +1,4 @@
+@EndUserText.label: 'User Settings for AM'
+define service ZRPSG_D_USER_SETTINGS {
+  expose ZRPSG_C_USER_SETTINGS;
+}

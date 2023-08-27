@@ -1,0 +1,34 @@
+managed implementation in class zbp_rpsg_i_am_pa unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_AM_PA //alias <alias_name>
+persistent table zrpsg_am_pa
+draft table zrpsg_dam_pa
+lock master total etag AllLastchangeTime
+authorization master ( instance )
+etag master LastchangeTime
+{
+
+  field ( readonly : update ) PartnerNum;
+  field ( readonly ) LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  create;
+  update;
+  delete( precheck );
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate;
+  draft action Discard;
+  mapping for zrpsg_am_pa
+    {
+      Name              = name;
+      PartnerNum        = partner_num;
+      LastchangeTime    = lastchange_time;
+      LastchangeUser    = lastchange_user;
+      AllLastchangeTime = all_lastchange_time;
+    }
+
+}

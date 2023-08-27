@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition forZRPSG_C_AM_PTEXT'
+define service ZRPSG_SD_AM_PTEXT {
+  expose ZRPSG_C_AM_PTEXT as PTEXT;
+}

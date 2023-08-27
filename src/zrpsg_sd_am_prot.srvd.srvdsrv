@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition forZRPSG_C_AM_PROT'
+define service ZRPSG_SD_AM_PROT {
+  expose ZRPSG_C_AM_PROT as prot;
+}

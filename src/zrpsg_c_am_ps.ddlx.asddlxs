@@ -1,0 +1,36 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Agrement Person',
+                typeNamePlural: 'Agrement Person',
+                title: { type: #STANDARD, value: 'PersonNum' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'PersonNum', direction:  #ASC }] }]
+   }
+annotate entity ZRPSG_C_AM_PS
+    with 
+{
+  @UI.facet: [   { id:      'PS',
+           purpose:         #STANDARD,
+           type:            #IDENTIFICATION_REFERENCE,
+           label:           'Agrement Partner',
+           position:        10 } ]
+
+  @UI: {  lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [ {position: 10 }]}
+    PersonNum;
+  @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [ {position: 20 }]}
+    Name;
+  @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ],
+          selectionField: [ {position: 30 }]}
+    PhoneNumber;
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [ {position: 40 }]}
+    Mail;
+    
+}

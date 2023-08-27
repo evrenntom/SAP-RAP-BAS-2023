@@ -1,0 +1,62 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+//  typeName: 'Longtext',
+//  typeNamePlural: 'Longtexts',
+                title: { type: #STANDARD
+//                , value: 'Num'
+                } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC } ] }]
+   }
+annotate entity ZRPSG_C_AM_LTEXT with 
+{
+
+
+  @UI.facet: [   { id:              'EL_LTEXT',
+               purpose:         #STANDARD,
+               type:            #IDENTIFICATION_REFERENCE,
+               label:           'Longtext',
+               position:        20 }
+               ]
+  @UI: {  //lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [{position: 10 }]}
+  Num;
+  @UI: {  //lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [{position: 20 }]}
+  VersionNum;
+  //@UI: {  lineItem:       [ { position: 30 } ],
+  //        identification: [ { position: 30 } ]
+  //        selectionField: [{position: 30 }]
+  //        }
+  //    ElementNum;
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [{position: 40 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_I_ET_LTEXT_VH', element: 'ElementType' }, useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  ElementType;
+  @UI: {  lineItem:       [ { position: 50 } ],
+          identification: [ { position: 50 } ],
+          selectionField: [{position: 50 }]}
+  Description;
+  @UI: {  lineItem:       [ { position: 60   } ],
+          identification: [ { position: 60 } ],
+          selectionField: [{position: 60 } ],
+          multiLineText: true , hidden: true}
+  Text;
+
+  @UI: { lineItem:       [ { position: 70   } ],
+        identification: [ { position: 70 , hidden: true} ],
+        selectionField: [{position: 70 } ],
+        multiLineText: true }
+        
+  Ltext;
+
+  @UI: {  hidden: true   }
+  ElementTypeText;
+
+}

@@ -1,0 +1,15 @@
+unmanaged implementation in class zbp_rpsg_i_am_vs_el_overview unique;
+strict ( 2 );
+
+define behavior for ZRPSG_I_AM_VS_EL_Overview //alias <alias_name>
+//persistent table zrpsg_am_vs_el_o
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  field ( readonly ) num, VersionNum, ElementNum;
+
+  create;
+  update;
+  delete;
+}

@@ -1,0 +1,88 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Agreement Version',
+                typeNamePlural: 'Agreement Versions',
+                title: { type: #STANDARD, value: 'Num' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC } ] }] 
+   }
+annotate entity ZRPSG_C_VS_AM
+    with 
+{
+@UI.facet: [   { 
+                 id:              'VS_AM',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Agreement Version',
+                 position:        10 },
+                 { 
+                 id:              'VS_AM',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Overview',
+                 position:        10,
+                 targetElement:   '_ov'
+                 }
+                 ]
+
+    @UI: {  lineItem:       [ { position: 10 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] } 
+    Num;
+    @UI: {  lineItem:       [ { position: 500 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    VersionNum;
+    
+//    @UI: {  lineItem:       [ { position: 510 } ],
+//            identification: [ { position: 10 } ],
+//            selectionField: [ { position: 10 } ] }
+// VersionsBeschreibung        
+    @UI: {  lineItem:       [ { position: 520 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    VersionStatus;
+    @UI: {  lineItem:       [ { position: 530 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    versiondatefrom;
+    @UI: {  lineItem:       [ { position: 540 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    versiondateto;
+//    VersionCreationUser;
+//    VersionCreationTime;
+//    VersionLastchangeUser;
+//    VersionLastchangeTime;
+    @UI: {  lineItem:       [ { position: 40 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    partnernum;
+    @UI: {  lineItem:       [ { position: 60 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    agreementtype;
+    @UI: {  lineItem:       [ { position: 30 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    agrementtitle;
+    @UI: {  lineItem:       [ { position: 50 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    agrementstatus;
+    @UI: {  lineItem:       [ { position: 70 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    agrementdatefrom;
+    @UI: {  lineItem:       [ { position: 80 } ],
+            identification: [ { position: 10 } ],
+            selectionField: [ { position: 10 } ] }
+    agrementdateto;
+//    AgrementCreationUser;
+//    AgrementCreationTime;
+//    AgrementLastchangeUser;
+//    AgrementLastchangeTime;
+//    AgrementAllLastchangeTime;
+    
+}

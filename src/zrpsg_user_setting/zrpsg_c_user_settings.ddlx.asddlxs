@@ -1,0 +1,40 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'User Setting',
+                typeNamePlural: 'User Settings',
+                title: { type: #STANDARD, value: 'UserId' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'UserId', direction:  #ASC }] }]
+   }
+annotate entity ZRPSG_C_USER_SETTINGS with
+{
+  @UI.facet: [   { id:              'User',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'User Setting',
+                   position:        10 }
+                   ]
+  @UI: {  lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [ { position: 10 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_C_USER_VH', element: 'UserId'  }, useForValidation: true }]
+  UserId;
+  @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [ { position: 20 } ]}
+  CustomisingViewType;
+  @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ],
+          selectionField: [ { position: 30 } ]}
+  LastchangeUser;
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [ { position: 40 } ]}
+  LastchangeTime;
+  @UI: {  lineItem:       [ { position: 50 } ],
+          identification: [ { position: 50 } ],
+          selectionField: [ { position: 50 } ]}
+  Alllastchangetime;
+
+}

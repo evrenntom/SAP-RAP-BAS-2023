@@ -1,0 +1,32 @@
+managed implementation in class zbp_rpsg_i_am_ob_c01 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_AM_OB_C01 //alias <alias_name>
+persistent table zrpsg_am_ob_c01
+draft table zrpsg_dam_ob_c01
+lock master total etag LastChangedAt
+etag master LocalLastChangedAt
+authorization master ( global )
+{
+
+  field( readonly : update ) TableName;
+
+  create;
+  update;
+  delete( precheck );
+
+  draft action Edit;
+  draft action Resume;
+  draft action Activate;
+  draft action Discard;
+  draft determine action Prepare;
+
+  mapping for zrpsg_am_ob_c01
+    {
+      TableName          = table_name;
+      Description        = description;
+      LastChangedAt      = last_changed_at;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+ }

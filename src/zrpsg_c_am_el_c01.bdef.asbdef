@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZRPSG_C_AM_EL_C01 //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _EL_C02 { create; with draft; }
+
+  use action Resume;
+  use action Edit;
+  use action Prepare;
+  use action Activate;
+  use action Discard;
+
+}
+
+define behavior for ZRPSG_C_AM_EL_C02 //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _el_c01 { with draft; }
+}

@@ -1,0 +1,24 @@
+unmanaged implementation in class zbp_rpsg_i_vs_am unique;
+strict ( 1 );
+
+define behavior for ZRPSG_I_VS_AM //alias <alias_name>
+//persistent table ZRPSG_AM_VS
+//draft table zrpsg_dvs_am
+//lock master total etag AllLastchangeTime
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+//  create;
+  update;
+  delete;
+
+  field ( readonly ) Num, VersionNum;
+
+//  mapping for ZRPSG_am_vs
+//  {
+//
+//
+//    ElementType =  element_type;
+//  }
+}

@@ -1,0 +1,52 @@
+managed implementation in class ZRPSG_CL_AM_PTEXT unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZRPSG_I_AM_PTEXT alias PTEXT
+persistent table zrpsg_am_ptext
+draft table ZRPSG_DAM_PTEXT
+etag master LastChangedAt
+lock master total etag LastchangeTime
+authorization master( global )
+
+{
+  field ( mandatory : create )
+   ElementType,
+   Language;
+
+  field ( readonly )
+   CreationTime,
+   CreationUser,
+   LastchangeTime,
+   LastchangeUser,
+   LastChangedAt;
+
+  field ( readonly : update )
+   ElementType,
+   Language;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZRPSG_AM_PTEXT
+  {
+    ElementType = element_type;
+    Language = spras;
+    Text = text;
+    CreationUser = creation_user;
+    CreationTime = creation_time;
+    LastchangeUser = lastchange_user;
+    LastchangeTime = lastchange_time;
+    AllLastchangeTime = all_lastchange_time;
+    LastChangedAt = last_changed_at;
+    LocalLastChanged = local_last_changed;
+  }
+}

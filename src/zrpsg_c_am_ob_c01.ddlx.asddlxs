@@ -1,0 +1,35 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Allowed Table',
+                typeNamePlural: 'Allowed Tables',
+                title: { type: #STANDARD, value: 'Description' } } }
+annotate view ZRPSG_C_AM_OB_C01 with
+{
+
+  @UI.facet: [ { id:      'Table',
+                 purpose: #STANDARD,
+                 type:    #IDENTIFICATION_REFERENCE,
+                 label:   'Allowed Table',
+                 position: 10 }  ]
+
+  //lineItem -> ALV
+  //identification -> detail screen
+  //selectionField -> filters
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH } ],
+         identification: [ { position: 10 } ],
+         selectionField: [ { position: 10 } ] }
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'ZRPSG_I_TABLES_ODE_VH', element: 'ABAPObject' }, useForValidation: true }]
+  TableName;
+  
+  @UI: { lineItem:       [ { position: 20 } ],
+         identification: [ { position: 20 } ],
+         selectionField: [ { position: 20 } ] }
+  Description;
+  
+  @UI.hidden: true
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+}

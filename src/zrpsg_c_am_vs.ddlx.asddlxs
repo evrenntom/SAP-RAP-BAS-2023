@@ -1,0 +1,176 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Version',
+                typeNamePlural: 'Versionen',
+                title: { type: #STANDARD, value: 'VersionNum' } }
+
+    //presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC } ] }]
+   }
+
+annotate view ZRPSG_C_AM_VS with
+{
+  @UI.facet: [   { id:              'VS',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Version',
+                   position:        10
+                 },
+                 
+                 {
+          id: 'AgtVersionStatus',
+          purpose: #HEADER,
+          type: #DATAPOINT_REFERENCE,
+          position: 15,
+          targetQualifier: 'AgreementVersionStatus'
+       },
+                 
+                 { id:              'VS_PS',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Personen Rollen',
+                   position:        20 ,
+                   targetElement:   '_VS_PS'
+
+
+                 },
+  //                 { id:              'VS_EL',
+  //                   purpose:         #STANDARD,
+  //                   type:            #LINEITEM_REFERENCE,
+  //                   label:           'Version Element',
+  //                   position:        30,
+  //                   targetElement:   '_VS_EL'
+  //                 },
+  
+                 { id:              'EL_CONTR',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Konditionen',
+                   position:        40 ,
+                   targetElement:   '_EL_CONTR'
+                 },
+                 { id:              'EL_LTEXT',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Langtexte',
+                   position:        40 ,
+                   targetElement:   '_EL_LTEXT'
+                 },
+                 { id:              'EL_STEXT',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Kurztexte',
+                   position:        60 ,
+                   targetElement:   '_EL_STEXT'
+                 }
+                 ,
+                  { id:              'VS_PT',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Textbausteine',
+                   position:        70 ,
+                   targetElement:   '_VS_PT'
+                 },
+                  { id:              'VS_PROT',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Textbausteine bearbeitbar',
+                   position:        80 ,
+                   targetElement:   '_VS_PROT'
+                 },                 
+                 
+                 {
+      id: 'General',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Allgemein',
+      position: 30,
+      targetQualifier: 'GeneralGroup'
+    },
+    {
+      id: 'Metadata',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'MetadataInfo',
+      label: 'Administration',
+      position: 40,
+      targetQualifier: 'MetadataGroup'
+    }
+                 
+                   ]
+
+  @UI: {  //lineItem:       [ { position: 10 } ],
+          fieldGroup: [ { qualifier: 'GeneralGroup', position: 10} ]
+          //identification: [ { position: 10 } ],
+          //selectionField: [{position: 10 }]
+          }
+  Num;
+
+  @UI: {  lineItem:       [ { position: 20 },
+                            { type: #FOR_ACTION, dataAction: 'copyVersion', label: 'Copy Version' } ],
+          fieldGroup:     [ { qualifier: 'GeneralGroup', position: 20} ],
+          identification: [ { position: 20 }
+                            //,{ type: #FOR_ACTION, dataAction: 'copyVersion', label: 'Copy Version' }
+                            ],
+          selectionField: [{position: 20 }]}
+  VersionNum;
+
+  @UI: {  lineItem:       [ { position: 25 , label: 'Version Beschreibung'} ],
+          fieldGroup:     [ { qualifier: 'GeneralGroup', position: 25} ],
+          identification: [ { position: 25 } ],
+          selectionField: [{position: 25 } ]}
+  VersionDesc;
+  
+  @UI: {  lineItem:       [ { position: 30 } ],
+  fieldGroup: [ { qualifier: 'GeneralGroup', position: 30} ],
+          //identification: [ { position: 30 } ],
+          selectionField: [{position: 30 }]}
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'ZRPSG_I_VS_STATUS_VH', element: 'Value' }, useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  @UI.dataPoint: { qualifier: 'AgreementVersionStatus', title: 'Status', criticality: 'VersionStatus' }
+  VersionStatus;
+
+
+  @UI: {  lineItem:       [ { position: 40 } ],
+  fieldGroup: [ { qualifier: 'GeneralGroup', position: 40} ],
+          identification: [ { position: 40 } ],
+          selectionField: [{position: 40 }]}
+  DateFrom;
+
+  @UI: {  lineItem:       [ { position: 50 } ],
+  fieldGroup: [ { qualifier: 'GeneralGroup', position: 50} ],
+          identification: [ { position: 50 } ],
+          selectionField: [{position: 50 }]}
+  DateTo;
+
+  @UI: {  //lineItem:       [ { position: 60 } ],
+  fieldGroup: [ { qualifier: 'MetadataGroup', position: 60} ]
+          //identification: [ { position: 60 } ] 
+          //selectionField: [{position: 60 }]
+          }
+  CreationUser;
+
+  @UI: {  //lineItem:       [ { position: 70 } ],
+  fieldGroup: [ { qualifier: 'MetadataGroup', position: 70} ]
+//          identification: [ { position: 70 } ]
+          //selectionField: [{position: 70 }]
+          }
+  CreationTime;
+
+  @UI: {  //lineItem:       [ { position: 80 } ],
+  fieldGroup: [ { qualifier: 'MetadataGroup', position: 80} ],
+          identification: [ { position: 80 } ]
+          //selectionField: [{position: 80 }]
+          }
+  LastchangeUser;
+
+  @UI: {  //lineItem:       [ { position: 90 } ],
+  
+  fieldGroup: [ { qualifier: 'MetadataGroup', position: 90} ],
+          identification: [ { position: 90 } ]
+          //selectionField: [{position: 90 }]
+          }
+  LastchangeTime;
+
+}

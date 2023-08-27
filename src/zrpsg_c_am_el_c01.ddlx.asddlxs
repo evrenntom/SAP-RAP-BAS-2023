@@ -1,0 +1,36 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Element Type Group',
+                typeNamePlural: 'Element Type Groups',
+                title: { type: #STANDARD, value: 'ElementTypeGroupNum' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'ElementTypeGroupNum', direction:  #ASC }] }] 
+   }
+annotate view ZRPSG_C_AM_EL_C01
+    with 
+{
+@UI.facet: [   { id:              'EL_C01',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Element Type Group',
+                 position:        10 },
+                 
+               { id:              'EL_C02',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Element Group Assignment',
+                 position:        20,
+                 targetElement:   '_EL_C02' }    
+               ] 
+    
+@UI: {  lineItem:       [ { position: 10 } ],
+        identification: [ { position: 10 } ],
+        selectionField: [{position: 10 }]} 
+    ElementTypeGroupNum;
+@UI: {  lineItem:       [ { position: 20 } ],
+        identification: [ { position: 20 } ],
+        selectionField: [{position: 20 }]} 
+    Description;
+    
+}

@@ -1,0 +1,35 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Element Type',
+                typeNamePlural: 'Element Types',
+                title: { type: #STANDARD, value: 'ElementType' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'ElementType', direction:  #ASC }] }]
+   }
+annotate view ZRPSG_C_AM_EL_C00 with
+{
+  @UI.facet: [   { id:              'EL_C00',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Element Type',
+                   position:        10 }
+             ]
+
+  @UI: {  lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [ { position: 10 }]}
+  ElementType;
+  @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [ { position: 20 }]}
+  Description;
+  @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [ { position: 20 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_I_AM_OB_C00_VH', element: 'ObjektType'  },
+  useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  ObjektType;
+
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Agreement Versions'
+define service ZRPSG_D_VS_AM {
+  expose ZRPSG_C_VS_AM as Agreement_Version_View;
+}

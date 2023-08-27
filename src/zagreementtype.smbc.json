@@ -1,0 +1,35 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Agreement Type",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_AGREEMENTTYPE_O4",
+    "serviceName": "ZUI_AGREEMENTTYPE_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "AgreementTypeAll",
+    "name": "Agreement Type",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "AgreementTypeAll",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "AgreementType",
+        "tableType": "gridTable",
+        "selectionMode": "single",
+        "creationModeName": "creationRow",
+        "rowCountMode": "auto"
+      }
+    ]
+  }
+}

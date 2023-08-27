@@ -1,0 +1,124 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Agreement',
+                typeNamePlural: 'Agreements',
+                title: { type: #STANDARD, value: 'Num' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC }] }]
+   }
+
+annotate view ZRPSG_C_AM with
+{
+
+  @UI.facet: [   { id:              'AM',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Agreement',
+                   position:        10 },
+                  { id:              'VS',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Version',
+                   position:        30,
+                   targetElement:   '_vs' }
+  ,
+                 {
+          id: 'PrtnrName',
+          purpose: #HEADER,
+          type: #DATAPOINT_REFERENCE,
+          position: 15,
+          targetQualifier: 'PartnerName'
+       }
+
+                   ]
+
+  @UI: {  lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [{position: 10 }]}
+  Num;
+
+  @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [{position: 20 }]}
+  @UI.textArrangement: #TEXT_FIRST
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_C_AM_PA_VH', element: 'PartnerNum'  },
+                                       additionalBinding: [{ localElement: 'PartnerName', element: 'Name' }],
+   useForValidation: true }]
+  PartnerNum;
+  @UI: {  lineItem:       [ { position: 21 } ],
+          identification: [ { position: 21 } ],
+          selectionField: [{position: 21 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_C_AM_PA_VH', element: 'Name'  },
+                                       additionalBinding: [{ localElement: 'PartnerNum', element: 'PartnerNum' }],
+   useForValidation: true }]
+  @UI.dataPoint: { qualifier: 'PartnerName', title: 'Partner', criticality: 'PartnerName' }
+  PartnerName;
+
+  @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ],
+          selectionField: [{position: 30 }]}
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'ZRPSG_I_AM_C00_VH', element: 'AgreementType' }, useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  AgreementType;
+
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [{position: 40 }]}
+  Title;
+
+//  @UI: {  lineItem:       [ { position: 50 } ],
+//          identification: [ { position: 50 } ],
+//          selectionField: [{position: 50 }]}
+//  @UI.textArrangement: #TEXT_FIRST
+//  Status;
+
+  @UI: {  lineItem:       [ { position: 55 } ],
+          identification: [ { position: 55 } ]
+          //selectionField: [{position: 55 }]
+          }
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_LANGUAGE', element: 'Language' }, useForValidation: true }]        
+  Language;
+  @UI: {  lineItem:       [ { position: 60 } ],
+          identification: [ { position: 60 } ],
+          selectionField: [{position: 60 }]}
+  DateFrom;
+
+  @UI: {  lineItem:       [ { position: 70 } ],
+          identification: [ { position: 70 } ],
+          selectionField: [{position: 70 }]}
+  DateTo;
+
+  @UI: {  //lineItem:       [ { position: 80 } ],
+          identification: [ { position: 80 } ]
+          //selectionField: [{position: 80 }]
+          }
+  CreationUser;
+
+  @UI: {  //lineItem:       [ { position: 90 } ],
+          identification: [ { position: 90 } ]
+          //selectionField: [{position: 90 }]
+          }
+  CreationTime;
+
+  @UI: {  //lineItem:       [ { position: 100 } ],
+          identification: [ { position: 100 } ]
+          //selectionField: [{position: 100 }]
+          }
+  LastchangeUser;
+
+  @UI: {  //lineItem:       [ { position: 110 } ]
+          identification: [ { position: 110 } ]
+          //selectionField: [{position: 110 }]
+          }
+  LastchangeTime;
+
+  @UI: {  //lineItem:       [ { position: 120 } ]
+          identification: [ { position: 120 } ]
+          //selectionField: [{position: 120 }]
+          }
+  AllLastchangeTime;
+
+
+
+}

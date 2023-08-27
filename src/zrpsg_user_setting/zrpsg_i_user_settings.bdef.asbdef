@@ -1,0 +1,34 @@
+managed implementation in class zbp_rpsg_i_user_settings unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_USER_SETTINGS //alias <alias_name>
+persistent table zrpsg_user_set
+draft table zrpsg_duser_set
+lock master total etag Alllastchangetime
+authorization master ( instance )
+etag master LastchangeTime
+{
+
+//  field ( readonly ) UserId;
+  field ( readonly ) LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  create;
+  update;
+  delete;
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate;
+  draft action Discard;
+  mapping for zrpsg_user_set
+    {
+      UserId              = user_id;
+      CustomisingViewType = customising_view_type;
+      LastchangeUser      = lastchange_user;
+      LastchangeTime      = lastchange_time;
+      AllLastchangeTime   = alllastchangetime;
+    }
+
+}

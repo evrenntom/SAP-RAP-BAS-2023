@@ -1,0 +1,10 @@
+@EndUserText.label: 'Agreement Type'
+define service ZRPSG_D_AM_C00 {
+  expose ZRPSG_C_AM_C00 as Agreement_Type;
+  expose ZRPSG_C_AM_EL_C00 as Element_Type;
+  expose ZRPSG_C_AM_EL_C01 as Element_Type_Group;
+  expose ZRPSG_C_AM_EL_C02 as Element_Type_Group_Assignment;
+  expose ZRPSG_C_AM_PS_C00 as Person_Role;
+  expose ZRPSG_C_AM_OB_C00 as Object_Type;
+  expose ZRPSG_C_AM_OB_C01 as Tables;
+}

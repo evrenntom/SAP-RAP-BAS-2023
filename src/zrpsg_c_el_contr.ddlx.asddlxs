@@ -1,0 +1,89 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+//  typeName: 'Condition Contract',
+//  typeNamePlural: 'Condition Contracts',
+                title: { type: #STANDARD
+//                , value: 'Num'
+                } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC } ] }]
+   }
+annotate entity ZRPSG_C_EL_CONTR with
+{
+  @UI.facet: [   { id:              'EL_CONTR',
+               purpose:         #STANDARD,
+               type:            #IDENTIFICATION_REFERENCE,
+               label:           'Contract',
+               position:        20 }
+               ]
+
+  @UI: {  //lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [{position: 10 }]}
+  Num;
+
+  @UI: {  //lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [{position: 20 }]}
+  VersionNum;
+
+  @UI: {  lineItem:       [ { type: #FOR_ACTION, dataAction: 'updateContract', label: 'Update or Create Contract', position: 10 }] }
+  ElementNum;
+
+  @UI: {  lineItem:       [ { position: 40 }],
+          identification: [ { position: 40 }],
+          selectionField: [{position: 40 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_I_ET_CONTR_VH', element: 'ElementType' }, useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  ElementType;
+
+  @UI: {  lineItem:       [ { position: 50 }],
+          identification: [ { position: 50 }],
+          selectionField: [{position: 50 }]}
+  HeaderText;
+
+  @UI: {  lineItem:       [ { position: 60 }],
+          identification: [ { position: 60 }],
+          selectionField: [{position: 60 }]}
+  CocoNum;
+
+  @UI: {  lineItem:       [ { position: 70 } ],
+          identification: [ { position: 70 } ] }
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'ZRPSG_I_CALCTYPE_VH', element: 'Value' }, useForValidation: true }]
+  @UI.textArrangement: #TEXT_FIRST
+  CalcType;
+
+  @UI: {  lineItem:       [ { position: 80 } ],
+          identification: [ { position: 80 } ],
+          selectionField: [ { position: 80 } ]}
+  Amount;
+  //@UI: {  lineItem:       [ { position: 90 } ],
+  //        identification: [ { position: 90 } ],
+  //        selectionField: [{position: 90 }]}
+  //    Currency;
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_CurrencyStdVH', element: 'Currency' }, useForValidation: true }]
+  Currency;
+  @UI: { lineItem:       [ { position: 90 } ],
+         identification: [ { position: 90 } ] }
+  PricingUnit;
+
+  //  @UI: { lineItem:       [ { position: 100 } ],
+  //         identification: [ { position: 100 } ] }
+  //  Unit;
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_UnitOfMeasureStdVH', element: 'UnitOfMeasure' }, useForValidation: true }]
+  Unit;
+  
+  @UI: { lineItem:       [ { position: 100 } ],
+         identification: [ { position: 100 } ] }
+  AmountPer;
+  
+  //  @UI: { lineItem:       [ { position: 110 } ],
+  //         identification: [ { position: 110 } ] }
+  //  Percentage;
+
+  @UI: { hidden: true }
+  ElementTypeText;
+
+}

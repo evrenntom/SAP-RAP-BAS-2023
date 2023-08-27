@@ -1,0 +1,4 @@
+@EndUserText.label: 'TEST PA RPSG'
+define service ZTEST_D_AM_PA_TEST {
+  expose ZRPSG_C_AM_PA;
+}

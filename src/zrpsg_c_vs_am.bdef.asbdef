@@ -1,0 +1,8 @@
+projection;
+strict ( 1 );
+
+define behavior for ZRPSG_C_VS_AM //alias <alias_name>
+{
+  use update;
+  use delete;
+}

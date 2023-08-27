@@ -1,0 +1,13 @@
+@EndUserText.label: 'Agrement'
+define service ZRPSG_D_AM {
+  expose ZRPSG_C_AM as Agreements;
+  expose ZRPSG_C_AM_VS as Version;
+  expose ZRPSG_C_AM_PA as Partner;
+  expose ZRPSG_C_AM_VS_PS as Person_Version_Assignment;
+  expose ZRPSG_C_AM_PS as Person;
+  expose ZRPSG_C_EL_CONTR as Contracts;
+  expose ZRPSG_C_AM_LTEXT as Longtext;
+  expose ZRPSG_C_AM_STEXT as Shorttext;
+  expose ZRPSG_C_AM_VS_PT as Predefined_Longtext;
+  expose ZRPSG_C_AM_VS_Prot as ProposolText;
+}

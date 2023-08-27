@@ -1,0 +1,69 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+//  typeName: 'Participant',
+//                typeNamePlural: 'Participants',
+                title: { type: #STANDARD
+//                ,
+//                value: 'Num'
+                 } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'PersonNum', direction:  #ASC } ] }]
+   }
+annotate entity ZRPSG_C_AM_VS_PS with
+{
+  @UI.facet: [   { id:              'PS',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Participant',
+                   position:        10 }
+                   ]
+
+//  @UI: {  //lineItem:       [ { position: 10 } ],
+//      identification: [ { position: 10 } ],
+//      selectionField: [{position: 10 }]}
+      @UI.hidden
+  Num;
+
+//  @UI: {  //lineItem:       [ { position: 20 } ],
+//          identification: [ { position: 20 } ],
+//          selectionField: [ { position: 20 }]}
+          @UI.hidden
+  VersionNum;
+
+  @UI: {  
+//  lineItem:       [ { position: 30 } ],
+      identification: [ { position: 30 } ],
+      selectionField: [ { position: 30 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_I_AM_PS_VH', element: 'PersonNum'  },
+     additionalBinding: [{ localElement: 'Pname', element: 'Name' , usage: #FILTER_AND_RESULT}],
+   useForValidation: true }]
+  @UI.textArrangement: #TEXT_ONLY
+  PersonNum;
+
+  @UI: {  
+//  lineItem:       [ { position: 40 } ],
+      identification: [ { position: 40 } ],
+      selectionField: [ { position: 40 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRPSG_I_AM_PS_C00_VH', element: 'Role'  },
+  additionalBinding: [{ localElement: 'Rdes', element: 'Description' , usage: #RESULT}],
+   useForValidation: true }]
+  @UI.textArrangement: #TEXT_ONLY
+  Role;
+
+  @UI: {  lineItem:       [ { position: 50 } ],
+    identification: [ { position: 50 } ]  }
+    @Search.defaultSearchElement: true
+  Pname;
+  @UI: {  lineItem:       [ { position: 60 } ],
+  identification: [ { position: 60 } ] }
+  @Search.defaultSearchElement: true
+  Rdes;
+  
+  @UI.hidden
+  RoleDescription;
+  @UI.hidden
+  PersonName;
+
+}

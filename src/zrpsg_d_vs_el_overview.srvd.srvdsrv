@@ -1,0 +1,9 @@
+@EndUserText.label: 'Version Element OVERVIEW'
+define service ZRPSG_D_VS_EL_OVERVIEW {
+  expose ZRPSG_C_AM_VS_EL_OVERVIEW;
+  expose ZRPSG_C_EL_CONTR;
+  expose ZRPSG_C_AM_VS;
+  expose ZRPSG_C_AM;
+  expose ZRPSG_C_AM_STEXT;
+  expose ZRPSG_C_AM_LTEXT;
+}

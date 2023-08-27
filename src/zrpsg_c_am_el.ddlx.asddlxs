@@ -1,0 +1,42 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Agrement Element',
+                typeNamePlural: 'Agrement Elements',
+                title: { type: #STANDARD, value: 'Num' } },
+
+    presentationVariant: [{ sortOrder: [{ by: 'Num', direction:  #ASC }] }] 
+   }
+
+annotate view ZRPSG_C_AM_EL
+    with 
+{
+    @UI.facet: [   { id:              'EL',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Agrement Element',
+                 position:        10 }
+                 
+                 ]
+     
+    @UI: { /* lineItem:       [ { position: 10 } ],*/
+            identification: [ { position: 10 } ],
+            selectionField: [{position: 10 }]}
+    Num;
+    
+    @UI: {  lineItem:       [ { position: 20 } ],
+            identification: [ { position: 20 } ],
+            selectionField: [{position: 20 }]} 
+    ElementNum;
+   
+    @UI: {  lineItem:       [ { position: 30 } ],
+            identification: [ { position: 30 } ],
+            selectionField: [{position: 30 }]} 
+    ElementType;
+    
+    @UI: {  lineItem:       [ { position: 40 } ],
+            identification: [ { position: 40 } ],
+            selectionField: [{position: 40 }]} 
+    Description;
+    
+}

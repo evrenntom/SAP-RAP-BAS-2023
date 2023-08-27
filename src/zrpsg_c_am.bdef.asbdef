@@ -1,0 +1,113 @@
+projection;
+//strict ( 1 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZRPSG_C_AM //alias <alias_name>
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _vs { create; with draft; }
+
+  use action Resume;
+  use action Edit;
+  use action Prepare;
+  use action Activate;
+  use action Discard;
+
+}
+
+define behavior for ZRPSG_C_AM_VS //alias <alias_name>
+use etag
+{
+  use update;
+  use delete;
+
+  use action copyVersion;
+
+  use association _am { with draft; }
+//  use association _VS_EL { create; with draft; }
+  use association _VS_PS { create; with draft; }
+  use association _EL_CONTR { create; with draft; }
+  use association _EL_LTEXT { create; with draft; }
+  use association _EL_STEXT { create; with draft; }
+  use association  _VS_PT { create; with draft; }
+  use association  _VS_PROT { create; with draft; }
+}
+
+//define behavior for ZRPSG_C_AM_VS_EL //alias <alias_name>
+//use etag
+//{
+//  use update;
+//  use delete;
+//
+//  use association _am { with draft; }
+//  use association _vs { with draft; }
+//  //use association _EL_CONTR { with draft; }
+//}
+
+define behavior for ZRPSG_C_AM_VS_PS //alias <alias_name>
+use etag
+{
+  use update;
+  use delete;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+}
+
+define behavior for ZRPSG_C_EL_CONTR
+use etag
+{
+  use update;
+  use delete;
+  use action updateContract;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+//  use association _VS_EL { with draft; }
+}
+
+define behavior for ZRPSG_C_AM_LTEXT
+use etag
+{
+  use update;
+  use delete;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+}
+
+define behavior for ZRPSG_C_AM_STEXT
+use etag
+{
+  use update;
+  use delete;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+}
+
+define behavior for ZRPSG_C_AM_VS_PT
+use etag
+{
+  use update;
+  use delete;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+}
+
+define behavior for ZRPSG_C_AM_VS_Prot
+use etag
+{
+  use update;
+  use delete;
+
+  use association _am { with draft; }
+  use association _vs { with draft; }
+}

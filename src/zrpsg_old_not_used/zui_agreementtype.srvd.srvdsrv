@@ -1,0 +1,4 @@
+define service ZUI_AGREEMENTTYPE {
+  expose ZC_AGREEMENTTYPE_S as AgreementTypeAll;
+  expose ZC_AGREEMENTTYPE as AgreementType;
+}

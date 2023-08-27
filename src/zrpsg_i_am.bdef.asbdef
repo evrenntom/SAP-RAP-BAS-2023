@@ -1,0 +1,359 @@
+managed implementation in class zbp_rpsg_i_am unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZRPSG_I_AM //alias <alias_name>
+persistent table zrpsg_am
+draft table zrpsg_dam
+lock master total etag AllLastchangeTime
+etag master LastchangeTime
+authorization master ( instance )
+early numbering
+{
+  field ( readonly ) num;
+  field ( readonly ) CreationUser, CreationTime, LastchangeUser, LastchangeTime, AllLastchangeTime;
+
+  create;
+  update;
+  delete;
+
+  association _vs { create; with draft; }
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate optimized;
+  draft action Discard;
+  mapping for zrpsg_am
+    {
+      Num               = num;
+      PartnerNum        = partner_num;
+      AgreementType     = agreement_type;
+      Title             = title;
+      Status            = status;
+      DateFrom          = date_from;
+      DateTo            = date_to;
+      CreationUser      = creation_user;
+      CreationTime      = creation_time;
+      LastchangeUser    = lastchange_user;
+      LastchangeTime    = lastchange_time;
+      AllLastchangeTime = all_lastchange_time;
+      Language          = spras;
+    }
+}
+
+define behavior for ZRPSG_I_AM_VS //alias <alias_name>
+implementation in class zbp_rpsg_i_am_vs unique
+persistent table zrpsg_am_vs
+draft table zrpsg_dam_vs
+lock dependent by _am
+authorization dependent by _am
+//etag dependent by _am //Agreement Version has own etag master
+early numbering
+etag master LastchangeTime
+{
+  update;
+  delete;
+  field ( readonly ) Num, VersionNum;
+  field ( readonly ) CreationUser, CreationTime, LastchangeUser, LastchangeTime;
+
+  determination setDefaultVersionStatus on modify { create; }
+
+  //factory action copyVersion parameter ZRPSG_A_AM_COPY_VERSION [1];
+  factory action copyVersion [1];
+
+  mapping for zrpsg_am_vs
+    {
+      Num            = num;
+      VersionNum     = version_num;
+      VersionStatus  = version_status;
+      VersionDesc    = version_desc;
+      DateFrom       = date_from;
+      DateTo         = date_to;
+      CreationUser   = creation_user;
+      CreationTime   = creation_time;
+      LastchangeUser = lastchange_user;
+      LastchangeTime = lastchange_time;
+    }
+
+  association _am { with draft; }
+  //  association _VS_EL; // { create; with draft; }
+  association _VS_PS { create; with draft; }
+  association _EL_CONTR { create; with draft; }
+  association _EL_LTEXT { create; with draft; }
+  association _EL_STEXT { create; with draft; }
+  association _VS_PT { create; with draft; }
+
+  association _VS_PROT { create; with draft; }
+
+}
+
+//define behavior for ZRPSG_I_AM_VS_EL //alias <alias_name>
+//persistent table zrpsg_am_vs_el
+//draft table zrpsg_dam_vs_el
+//lock dependent by _am
+//authorization dependent by _am
+//etag dependent by _vs
+////etag master <field_name>
+//early numbering
+//{
+//  update;
+//  delete;
+//  field ( readonly ) Num, VersionNum;
+//  field ( readonly : update ) ElementNum;
+//
+//  //  association _EL_CONTR { with draft; }
+//  association _VS { with draft; }
+//  association _am { with draft; }
+//  mapping for zrpsg_am_vs_el
+//    {
+//      VersionNum = version_num;
+//      ElementNum  = element_num;
+//      ElementType = element_type;
+//    }
+//}
+
+//define behavior for ZRPSG_I_AM_VS_EL //alias <alias_name>
+//persistent table zrpsg_am_vs_el
+//draft table zrpsg_dam_vs_el
+//lock dependent by _am
+//authorization dependent by _am
+//etag dependent by _vs
+////etag master <field_name>
+//early numbering
+//{
+//  update;
+//  delete;
+//  field ( readonly ) Num, VersionNum;
+//  field ( readonly : update ) ElementNum;
+//
+//  //  association _EL_CONTR { with draft; }
+//  association _VS { with draft; }
+//  association _am { with draft; }
+//  mapping for zrpsg_am_vs_el
+//    {
+//      VersionNum = version_num;
+//      ElementNum  = element_num;
+//      ElementType = element_type;
+//    }
+//}
+
+define behavior for ZRPSG_I_AM_VS_PS //alias <alias_name>
+persistent table zrpsg_am_vs_ps
+draft table zrpsg_dam_vs_ps
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Num, VersionNum;
+  field ( readonly : update ) PersonNum, Role;
+  field ( readonly ) Pname, Rdes;
+
+  side effects
+  {
+    field PersonNum affects field Pname;
+    field Role affects field Rdes;
+  }
+
+  determination fill_to_pname on modify { field PersonNum; }
+  determination fill_to_Rdes on modify { field Role; }
+
+  association _vs { with draft; }
+  association _am { with draft; }
+  mapping for zrpsg_am_vs_ps
+    {
+      PersonNum  = person_num;
+      Num        = num;
+      VersionNum = version_num;
+      Role       = role;
+      Pname      = pname;
+      Rdes       = rdes;
+    }
+
+}
+
+define behavior for ZRPSG_I_EL_CONTR alias ContractEntity
+implementation in class zbp_rpsg_i_el_contr unique
+persistent table zrpsg_el_contr
+draft table zrpsg_del_contr
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) num, VersionNum;
+  field ( readonly ) ElementNum;
+  field ( mandatory : create, readonly : update ) CalcType;
+  field ( features : instance ) Amount, Currency, AmountPer, PricingUnit, Unit;
+  field ( readonly ) Percentage;
+
+  determination setPercentage on modify { create; }
+
+  //Actions
+  //create_SIM_CONTR
+  //create_SETTL_CONTR
+  //  action updateContract result [1] $self;
+  determination updateOrCreateContract on save
+  { create;
+    field ElementType;
+    field HeaderText;
+    field CalcType;
+    field Amount;
+    field Currency;
+    field AmountPer;
+    field PricingUnit;
+    field Unit; }
+
+  determine action updateContract
+  {
+    determination ( always ) updateOrCreateContract;
+  }
+
+  //  association _VS_EL { with draft; }
+  association _VS { with draft; }
+  association _AM { with draft; }
+  mapping for zrpsg_el_contr
+    {
+      Num         = num;
+      VersionNum  = version_num;
+      ElementNum  = element_num;
+      ElementType = element_type;
+      HeaderText  = header_text;
+      CocoNum     = coco_num;
+      CalcType    = calc_type;
+      Amount      = amount;
+      Currency    = currency;
+      AmountPer   = amount_per;
+      PricingUnit = kpein;
+      Unit        = kmein;
+    }
+}
+
+define behavior for ZRPSG_I_AM_LTEXT
+persistent table zrpsg_am_ltext
+draft table zrpsg_dam_ltext
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) num, VersionNum, ElementNum;
+
+  association _VS { with draft; }
+  association _AM { with draft; }
+  mapping for zrpsg_am_ltext
+    {
+      Num         = num;
+      VersionNum  = version_num;
+      ElementNum  = element_num;
+      ElementType = element_type;
+      Description = description;
+      Text        = text;
+      Ltext       = ltext;
+    }
+}
+
+define behavior for ZRPSG_I_AM_STEXT
+persistent table zrpsg_am_stext
+draft table zrpsg_dam_stext
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) num, VersionNum, ElementNum;
+
+  association _VS { with draft; }
+  association _AM { with draft; }
+  mapping for zrpsg_am_stext
+    {
+      Num         = num;
+      VersionNum  = version_num;
+      ElementNum  = element_num;
+      ElementType = element_type;
+      Description = description;
+      Text        = text;
+    }
+}
+
+define behavior for ZRPSG_I_AM_VS_PT
+persistent table zrpsg_am_vs_pt
+draft table zrpsg_dam_vs_pt
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) num, VersionNum, ElementNum;
+  field ( readonly ) Text;
+
+  side effects
+  {
+    field ElementType affects field Text;
+  }
+
+  //    event ValueHelp parameter ZRPSG_I_AM_VS_PT
+
+  //    determination handleValueHelp on modify { field ElementType; }
+  determination fill_to_pt on modify { field ElementType; }
+
+  association _VS { with draft; }
+  association _AM { with draft; }
+  mapping for zrpsg_am_vs_pt
+    {
+      Num         = num;
+      VersionNum  = version_num;
+      ElementNum  = element_num;
+      ElementType = element_type;
+      Text        = text;
+    }
+}
+
+define behavior for ZRPSG_I_AM_VS_PROT
+persistent table zrpsg_am_vs_prot
+draft table zrpsg_d_vs_prot
+lock dependent by _am
+authorization dependent by _am
+etag dependent by _vs
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) num, VersionNum, ElementNum;
+  //    field ( readonly ) Text;
+
+  side effects
+  {
+    field ElementType affects field Text;
+  }
+
+  //    event ValueHelp parameter ZRPSG_I_AM_VS_PT
+
+  ////    determination handleValueHelp on modify { field ElementType; }
+  ////    determination fill_to_pt on modify { field ElementType; }
+
+  determination fill_to_prot on modify { field ElementType; }
+
+  association _VS { with draft; }
+  association _AM { with draft; }
+  mapping for zrpsg_am_vs_prot
+    {
+      Num         = num;
+      VersionNum  = version_num;
+      ElementNum  = element_num;
+      ElementType = element_type;
+      Spras       = spras;
+      Text        = text;
+    }
+}
